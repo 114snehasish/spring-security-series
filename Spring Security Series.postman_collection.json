@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "29cfce59-2335-4490-88aa-248b36eec426",
+		"name": "Spring Security Series",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Part 1",
+			"item": [
+				{
+					"name": "Spring Secuirty Vanilla/OOTB feature",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080"
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
