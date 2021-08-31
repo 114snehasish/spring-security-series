@@ -1,17 +1,20 @@
 package com.snehasish.ssc2.model;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
+@Table(name = "User", indexes = {
+        @Index(name = "idx_user_id_unq", columnList = "id", unique = true)
+})
 @Entity
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Builder
 public class User {
     @Id
@@ -20,4 +23,17 @@ public class User {
     private String userName;
     private String password;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 562048007;
+    }
 }
