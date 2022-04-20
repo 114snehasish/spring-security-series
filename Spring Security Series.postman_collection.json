@@ -18,13 +18,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "12345",
+									"key": "username",
+									"value": "testuser",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "jdoe",
+									"key": "password",
+									"value": "12345",
 									"type": "string"
 								}
 							]
@@ -32,12 +32,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080",
-							"protocol": "http",
+							"raw": "{{url}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8080"
+								"{{url}}"
+							]
 						}
 					},
 					"response": []
@@ -71,17 +69,42 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080",
-							"protocol": "http",
+							"raw": "{{url}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8080"
+								"{{url}}"
+							]
 						}
 					},
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8080",
+			"type": "string"
 		}
 	]
 }
