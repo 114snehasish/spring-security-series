@@ -1,12 +1,26 @@
 package com.snehasish.ssc3.providers;
 
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
-public class CustomAuthProvider implements AuthenticationProvider {
+@Slf4j
+public record CustomAuthProvider(
+        UserDetailsService userDetailsService,
+        PasswordEncoder passwordEncoder
+) implements AuthenticationProvider {
 
     /**
      * This is called by Authentication Manager once it determines this provider can support
@@ -19,6 +33,26 @@ public class CustomAuthProvider implements AuthenticationProvider {
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        String userName = authentication.getName();
+        String password = String.valueOf(authentication.getCredentials());
+        UserDetails user = null;
+        try {
+            user = userDetailsService.loadUserByUsername(userName);
+        } catch (UsernameNotFoundException ex) {
+            log.error("user with name {} not found. Error thrown with message: {}", userName, ex.getMessage());
+            throw ex;
+        }
+        if (Objects.nonNull(user)) {
+            log.debug("User found. checking password");
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                log.debug("User authenticated. Returning fully authenticated object");
+                return new UsernamePasswordAuthenticationToken(userName, password, user.getAuthorities());
+            } else {
+                log.error("Password did not match. {} will be thrown",
+                        BadCredentialsException.class.getSimpleName());
+                throw new BadCredentialsException("Error, password did not match");
+            }
+        }
         return null;
     }
 
@@ -31,6 +65,11 @@ public class CustomAuthProvider implements AuthenticationProvider {
      */
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        log.debug("Checking whether {} support {} or not",
+                getClass().getSimpleName(),
+                authentication.getSimpleName());
+        val result = UsernamePasswordAuthenticationToken.class.equals(authentication);
+        log.debug("The authentication type is " + (result ? "supported" : "not supported"));
+        return result;
     }
 }
