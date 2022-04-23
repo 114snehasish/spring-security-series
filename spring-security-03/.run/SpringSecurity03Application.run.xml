@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SpringSecurity03Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" />
+    <module name="spring-security-03" />
+    <option name="PROGRAM_PARAMETERS" value="--logging.level.com.snehasish.ssc3=DEBUG" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.snehasish.ssc3.SpringSecurity03Application" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
