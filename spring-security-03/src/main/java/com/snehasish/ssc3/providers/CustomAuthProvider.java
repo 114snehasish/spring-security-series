@@ -33,9 +33,9 @@ public record CustomAuthProvider(
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String userName = authentication.getName();
-        String password = String.valueOf(authentication.getCredentials());
-        UserDetails user = null;
+        val userName = authentication.getName();
+        val password = String.valueOf(authentication.getCredentials());
+        UserDetails user;
         try {
             user = userDetailsService.loadUserByUsername(userName);
         } catch (UsernameNotFoundException ex) {
