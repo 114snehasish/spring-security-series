@@ -1,5 +1,6 @@
 package com.snehasish.ssc3.configs;
 
+import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;
@@ -13,9 +14,9 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        var userDetailsService = new InMemoryUserDetailsManager();
-        var user1 = User.withUsername("testuser").password(passwordEncoder.encode("12345")).authorities("read", "write").build();
-        var user2 = User.withUsername("testuser2").password(passwordEncoder.encode("67890")).authorities("read", "write").build();
+        val userDetailsService = new InMemoryUserDetailsManager();
+        val user1 = User.withUsername("testuser").password(passwordEncoder.encode("12345")).authorities("read", "write").build();
+        val user2 = User.withUsername("testuser2").password(passwordEncoder.encode("67890")).authorities("read", "write").build();
         userDetailsService.createUser(user1);
         userDetailsService.createUser(user2);
         return userDetailsService;
