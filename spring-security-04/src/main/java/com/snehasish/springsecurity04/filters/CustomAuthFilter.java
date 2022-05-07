@@ -2,6 +2,8 @@ package com.snehasish.springsecurity04.filters;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,11 +18,10 @@ import java.io.IOException;
 
 @Component
 @Slf4j
-public record CustomAuthFilter(
-        AuthenticationManager authenticationManager
-) implements Filter {
+public class CustomAuthFilter implements Filter {
     public static final String HEADER_USERNAME = "username";
     public static final String HEADER_PASSWORD = "password";
+    private AuthenticationManager authenticationManager;
 
     @Override
     public void doFilter(ServletRequest servletRequest,
@@ -43,4 +44,11 @@ public record CustomAuthFilter(
     private String getHeaderValue(ServletRequest servletRequest, String headerName) {
         return ((HttpServletRequest) servletRequest).getHeader(headerName);
     }
+
+    @Autowired
+    @Lazy
+    public void setAuthenticationManager(AuthenticationManager manager) {
+        this.authenticationManager = manager;
+    }
+
 }
