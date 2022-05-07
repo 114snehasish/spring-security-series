@@ -26,7 +26,7 @@ public record DBUserDetailsManager(
         } catch (DataAccessException ex) {
             handleException(user,
                     ex,
-                    "Unable to create user with name ");
+                    "Unable to create user with name %s");
         }
     }
 

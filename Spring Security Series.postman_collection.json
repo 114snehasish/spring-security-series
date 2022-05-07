@@ -89,13 +89,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "12345",
+									"key": "username",
+									"value": "testuser",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "testuser",
+									"key": "password",
+									"value": "12345",
 									"type": "string"
 								}
 							]
@@ -106,6 +106,48 @@
 							"raw": "{{url}}",
 							"host": [
 								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Part 4",
+			"item": [
+				{
+					"name": "Spring Secuirty AutneticationFilter",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "67890",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mstone",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/getUserDetails",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"getUserDetails"
 							]
 						}
 					},
