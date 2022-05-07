@@ -123,22 +123,21 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "67890",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "mstone",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "username",
+								"value": "mstone",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "67890",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{url}}/api/v1/getUserDetails",
 							"host": [
