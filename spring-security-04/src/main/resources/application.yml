@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/spring_security_series
+    username: spring_security_series
+    password: spring_security_series
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: trace
+    org.springframework.security.*: trace
+    com.snehasish.springsecurity04: debug
